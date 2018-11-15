@@ -1,4 +1,4 @@
-filename <- "./synthetic_control.xlsx"
+filename <- "./benchmark_results/synthetic_control.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 

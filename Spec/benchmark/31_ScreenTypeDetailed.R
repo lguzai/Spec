@@ -1,4 +1,4 @@
-filename <- "./ScreenType.xlsx"
+filename <- "./benchmark_results/ScreenType.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 

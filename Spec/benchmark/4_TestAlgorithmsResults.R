@@ -73,7 +73,7 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
 		})
 		
 		#SpecDetec
-        SpecDetec <- spec(timeSerie)
+        SpecDetec <- Spec(timeSerie, neighboorsNumber = 6, tolerance = 0.005, estimationChangePointsNumber = length(classes))
         SpecDetec.ChangePoints <- SpecDetec
         SpecDetec.RankingResults[[count]] <- RankingResults(SpecDetec.ChangePoints, classes)
 	}

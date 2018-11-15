@@ -1,4 +1,4 @@
-filename <- "./FaceAll.xlsx"
+filename <- "./benchmark_results/FaceAll.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 

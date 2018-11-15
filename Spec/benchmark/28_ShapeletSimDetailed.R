@@ -1,4 +1,4 @@
-filename <- "./ShapeletSim.xlsx"
+filename <- "./benchmark_results/ShapeletSim.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 

@@ -281,9 +281,9 @@ rm(classes)
 #--------------------  Meat --------------------
 
 timeSeries <- Meat[, 2:449]
-classes <- cpt.meanvar(as.numeric(unlist(Meat[, 1])),test.stat='Normal',method='PELT', penalty="SIC")
+classes <- cpts(cpt.meanvar(as.numeric(unlist(Meat[, 1])), test.stat = 'Normal', method = 'PELT', penalty = "SIC"))
 
-Meat.Results <- TestAlgorithmsResults(timeSeries, cpts(classes))
+Meat.Results <- TestAlgorithmsResults(timeSeries, classes)
 
 rm(timeSeries)
 rm(classes)

@@ -1,4 +1,4 @@
-filename <- "./OliveOil.xlsx"
+filename <- "./benchmark_results/OliveOil.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 

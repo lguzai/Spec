@@ -1,4 +1,4 @@
-filename <- "./ShapesAll.xlsx"
+filename <- "./benchmark_results/ShapesAll.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 

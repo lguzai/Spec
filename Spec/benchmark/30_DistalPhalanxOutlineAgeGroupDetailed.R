@@ -1,4 +1,4 @@
-filename <- "./DistalPhalanxOutlineAgeGroup.xlsx"
+filename <- "./benchmark_results/DistalPhalanxOutlineAgeGroup.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 
