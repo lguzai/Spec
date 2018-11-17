@@ -1,15 +1,40 @@
-RankingResults <- function(resultToTest, classes) {
-	i <- 0
-	numberOfChangePoints <- length(classes)
+RankingResults <- function(resultToTest, classes, lengthTimeSerie, tolerance) {
+    i <- 0
+    numberOfChangePoints <- length(classes)
 	VP <- NULL
 	FN <- NULL
 	FP <- NULL
-	VN <- NULL
+    VN <- NULL
 
-	while (i < numberOfChangePoints){
+    if (tolerance > 0) {
+        resultWithTolerance <- vector()
+        tolerance <- round((lengthTimeSerie * tolerance)/100, digits = 0)
+
+        while (i < length(resultToTest)) {
+            if ((resultToTest[i + 1] - tolerance) < 0) {
+                resultWithTolerance <- c(resultWithTolerance, 1:resultToTest[i + 1])
+            } else {
+                resultWithTolerance <- c(resultWithTolerance, (resultToTest[i + 1] - tolerance):(resultToTest[i + 1]))
+            }
+
+            if ((resultToTest[i + 1] + tolerance) > lengthTimeSerie) {
+                resultWithTolerance <- c(resultWithTolerance, resultToTest[i + 1]:lengthTimeSerie)
+            } else {
+                resultWithTolerance <- c(resultWithTolerance, (resultToTest[i + 1] + 1):(resultToTest[i + 1] + tolerance))
+            }
+
+            i <- i + 1
+        }
+    }
+    else {
+        resultWithTolerance <- resultToTest
+    }
+
+    i <- 0
+    while (i < numberOfChangePoints){
 	 changePoint <- classes[i + 1]
 
-	 if(changePoint %in% resultToTest){
+     if (changePoint %in% resultWithTolerance) {
 		VP <- c(VP, classes[i + 1])
 	 } else {
 		FN <- c(FN, classes[i + 1])

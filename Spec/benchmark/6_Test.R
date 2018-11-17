@@ -29,9 +29,9 @@ rm(classes)
 #--------------------  ECG200 --------------------
 
 timeSeries <- ECG200[, 2:97]
-classes <- cpt.meanvar(as.numeric(unlist(ECG200[, 1])),test.stat='Normal',method='PELT', penalty="SIC")
+classes <- cpts(cpt.meanvar(as.numeric(unlist(ECG200[, 1])), test.stat = 'Normal', method = 'PELT', penalty = "SIC"))
 
-ECG200.Results <- TestAlgorithmsResults(timeSeries, cpts(classes))
+ECG200.Results <- TestAlgorithmsResults(timeSeries, classes)
 
 rm(timeSeries)
 rm(classes)
