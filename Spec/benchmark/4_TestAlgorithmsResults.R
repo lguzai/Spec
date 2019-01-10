@@ -39,16 +39,18 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
 	for(i in 1:ncol(timeSeries)) {
 		
         count <- count + 1
-        print("Série " + toString(count) + " / " + toString(seriesSize))
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), toString(Sys.time())))
 
 		timeSerie <- as.numeric(unlist(timeSeries[, count]))
-	
+
 		#AMOC
 		AMOC <- cpt.meanvar(timeSerie, penalty="MBIC", pen.value=0, method="AMOC",test.stat="Normal", class=TRUE, param.estimates=TRUE,minseglen=1)
 		AMOC.ChangePoints <- cpts(AMOC)
         AMOC.RankingResults[[count]] <- RankingResults(cpts(AMOC), classes, length(timeSerie), 0)
         AMOC.RankingResults_5[[count]] <- RankingResults(cpts(AMOC), classes, length(timeSerie), 5)
         AMOC.RankingResults_10[[count]] <- RankingResults(cpts(AMOC), classes, length(timeSerie), 10)
+
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado AMOC", toString(Sys.time())))
 
 		#BinSeg 
 		binseg <- cpt.meanvar(timeSerie,test.stat='Normal',method='BinSeg',penalty="SIC")
@@ -57,12 +59,16 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
         binseg.RankingResults_5[[count]] <- RankingResults(cpts(binseg), classes, length(timeSerie), 5)
         binseg.RankingResults_10[[count]] <- RankingResults(cpts(binseg), classes, length(timeSerie), 10)
 
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado BinSeg", toString(Sys.time())))
+
 		#SegNeigh
 		SegNeigh <- cpt.meanvar(timeSerie,test.stat='Normal',method='SegNeigh',penalty="SIC")
 		SegNeigh.ChangePoints <- cpts(SegNeigh)
         SegNeigh.RankingResults[[count]] <- RankingResults(cpts(SegNeigh), classes, length(timeSerie), 0)
         SegNeigh.RankingResults_5[[count]] <- RankingResults(cpts(SegNeigh), classes, length(timeSerie), 5)
         SegNeigh.RankingResults_10[[count]] <- RankingResults(cpts(SegNeigh), classes, length(timeSerie), 10)
+
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado SegNeigh", toString(Sys.time())))
 
 		#PELT
 		Pelt <- cpt.meanvar(timeSerie,test.stat='Normal',method='PELT',penalty="SIC", pen.value=0.01)
@@ -71,6 +77,8 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
         Pelt.RankingResults_5[[count]] <- RankingResults(cpts(Pelt), classes, length(timeSerie), 5)
         Pelt.RankingResults_10[[count]] <- RankingResults(cpts(Pelt), classes, length(timeSerie), 10)
 
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado PELT", toString(Sys.time())))
+
 		#E-Divisive 
 		eDivisive <- e.divisive(as.matrix(timeSerie), alpha=1)
 		eDivisive.ChangePoints <- eDivisive$estimates
@@ -78,12 +86,16 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
         eDivisive.RankingResults_5[[count]] <- RankingResults(eDivisive$estimates, classes, length(timeSerie), 5)
         eDivisive.RankingResults_10[[count]] <- RankingResults(eDivisive$estimates, classes, length(timeSerie), 10)
 
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado E-Divisive", toString(Sys.time())))
+
 		#EDM 
 		EDM <- breakout(timeSerie, method='multi', beta=.001, degree=1, plot=TRUE)
 		EDM.ChangePoints <- EDM$loc
         EDM.RankingResults[[count]] <- RankingResults(EDM$loc, classes, length(timeSerie), 0)
         EDM.RankingResults_5[[count]] <- RankingResults(EDM$loc, classes, length(timeSerie), 5)
         EDM.RankingResults_10[[count]] <- RankingResults(EDM$loc, classes, length(timeSerie), 10)
+
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado EDM", toString(Sys.time())))
 
 		#MFT
         MFT <- MFT.mean(timeSerie, print.output = FALSE, plot.CPD = FALSE, main = FALSE, plot.Q = FALSE, plot.M = FALSE,
@@ -93,12 +105,16 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
         MFT.RankingResults_5[[count]] <- RankingResults(MFT$SWD[[1]], classes, length(timeSerie), 5)
         MFT.RankingResults_10[[count]] <- RankingResults(MFT$SWD[[1]], classes, length(timeSerie), 10)
 
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado MFT", toString(Sys.time())))
+
 		#Breakfast
 		Breakfast <- hybrid.cpt(timeSerie)
 		Breakfast.ChangePoints <- MFT$cpt
         Breakfast.RankingResults[[count]] <- RankingResults(MFT$cpt, classes, length(timeSerie), 0)
         Breakfast.RankingResults_5[[count]] <- RankingResults(MFT$cpt, classes, length(timeSerie), 5)
         Breakfast.RankingResults_10[[count]] <- RankingResults(MFT$cpt, classes, length(timeSerie), 10)
+
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado Breakfast", toString(Sys.time())))
 		
 		#gSeg
         gSeg.RankingResults[[count]] <- RankingResults(c(0), classes, length(timeSerie), 0)
@@ -117,7 +133,9 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
 			gSeg.ChangePoints <- gSeg.gseg2$scanZ$max.type$tauhat
 		},
 		error=function(cond) {
-		})
+        })
+
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado gSeg", toString(Sys.time())))
 		
 		#SpecDetec
         SpecDetec <- Spec(timeSerie, neighboorsNumber = 6, tolerance = 0.005, estimationChangePointsNumber = length(classes))
@@ -125,6 +143,8 @@ TestAlgorithmsResults <- function(timeSeries, classes) {
         SpecDetec.RankingResults[[count]] <- RankingResults(SpecDetec.ChangePoints, classes, length(timeSerie), 0)
         SpecDetec.RankingResults_5[[count]] <- RankingResults(SpecDetec.ChangePoints, classes, length(timeSerie), 5)
         SpecDetec.RankingResults_10[[count]] <- RankingResults(SpecDetec.ChangePoints, classes, length(timeSerie), 10)
+
+        print(paste("Série ", toString(count), " / ", toString(seriesSize), " Finalizado SpecDetec", toString(Sys.time())))
 	}
 
 	result <- list(

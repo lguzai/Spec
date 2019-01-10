@@ -1,4 +1,4 @@
-dataSetUCR_TS_Archive_Location <- 'F:/Downloads/TSC' #source: http://timeseriesclassification.com/TSC.zip date: 2018-11-08
+dataSetUCR_TS_Archive_Location <- './TSC' #source: http://timeseriesclassification.com/TSC.zip date: 2018-11-08
 
 #1-Import FaceAll
 FaceAll <- read_csv(paste(dataSetUCR_TS_Archive_Location, "/FaceAll/FaceAll_TEST.txt", sep = ""), col_names = FALSE)

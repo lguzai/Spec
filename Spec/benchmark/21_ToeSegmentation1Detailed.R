@@ -1,4 +1,4 @@
-filename <- "./benchmark_results/ToeSegmentation1.xlsx"
+filename <- ".//benchmark_results//ToeSegmentation1.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 

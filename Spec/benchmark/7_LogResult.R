@@ -279,7 +279,7 @@ colnames(Result) <- c("AMOC", "BinSeg", "SegNeigh", "PELT", "EDivisive", "EDM", 
 rownames(Result) <- c("FaceAll", "ElectricDevices", "ECG", "Yoga", "Wine", "Earthquakes", "Coffee", "BeetleFly", "WormsTwoClass", "ArrowHead", "ShapesAll", "Computers", "ToeSegmentation", "Strawberry", "RefrigerationDevices", "Phoneme", "OliveOil", "SmallKitchenAppliances", "LargeKitchenAppliances", "ShapeletSim", "Meat", "BirdChicken", "DistalPhalanxOutlineAgeGroup", "ScreenType", "synthetic_control")
 Result <- as.table(Result)
 
-filename <- "D:/Dropbox/Projeto/Experimentos/Script de Testes em Métodos/Resultados.xlsx"
+filename <- ".//benchmark_results//Resultados.xlsx"
 wb <- createWorkbook(type="xlsx")
 
 sheet <- createSheet(wb, sheetName = "Resultados")
